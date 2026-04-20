@@ -94,6 +94,7 @@ Las letras dinámicas (G, H, J, Ñ, S, Z) están en desarrollo para futuras vers
 ## Desarrolladores
 
 - David Santiago Granados Cárdenas
+- Julián Felipe Angarita Alarcón
 
 ## Proyecto base
 
