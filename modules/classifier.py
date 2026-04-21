@@ -20,7 +20,7 @@ class SignClassifier:
         else:
             with open(self.data_path, 'w') as f:
                 json.dump([], f)
-            print("No hay dataset. Se creó uno nuevo vacío")
+            print("No había dataset. Se creó uno nuevo vacío")
 
     def save_example(self, landmarks, label):
         os.makedirs(os.path.dirname(self.data_path), exist_ok=True)
