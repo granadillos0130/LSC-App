@@ -10,6 +10,7 @@ class SignClassifier:
         self.load_dataset()
 
     def load_dataset(self):
+        os.makedirs(os.path.dirname(self.data_path), exist_ok=True)
         if os.path.exists(self.data_path):
             with open(self.data_path, 'r') as f:
                 data = json.load(f)
@@ -17,9 +18,12 @@ class SignClassifier:
                 self.labels = [item['label'] for item in data]
                 print(f"Dataset cargado: {len(self.labels)} ejemplos")
         else:
-            print("No hay dataset aun hay que entrenar el modelo")
+            with open(self.data_path, 'w') as f:
+                json.dump([], f)
+            print("No había dataset. Se creó uno nuevo vacío")
 
     def save_example(self, landmarks, label):
+        os.makedirs(os.path.dirname(self.data_path), exist_ok=True)
         data = []
         if os.path.exists(self.data_path):
             with open(self.data_path, 'r') as f:
