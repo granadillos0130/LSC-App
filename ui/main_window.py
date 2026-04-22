@@ -7,10 +7,12 @@ from PyQt5.QtCore import QTimer, Qt
 from PyQt5.QtGui import QImage, QPixmap
 
 from modules.detector import HandDetector
-from modules.classifier import SignClassifier
 from modules.voice import VoiceModule
 from modules.sentence_builder import SentenceBuilder
 from modules.sign_display import SignDisplay
+from modules.db.dataset_repo import DatabaseRepository
+from modules.services.dataset_service import DatasetService
+from modules.classifier import SignClassifier
 
 class MainWindow(QMainWindow):
     def __init__(self):
@@ -19,7 +21,13 @@ class MainWindow(QMainWindow):
         self.setMinimumSize(1000, 700)
 
         self.detector = HandDetector()
-        self.classifier = SignClassifier()
+        
+        repo = DatabaseRepository()
+        self.dataset_service = DatasetService(repo)
+        self.dataset_service.load()
+
+        self.classifier = SignClassifier(self.dataset_service)
+        
         self.voice = VoiceModule()
         self.builder = SentenceBuilder()
         self.display = SignDisplay()
@@ -203,7 +211,7 @@ class MainWindow(QMainWindow):
         if landmarks:
             normalized = self.detector.normalize(landmarks)
             if normalized:
-                self.classifier.save_example(normalized, letter)
+                self.dataset_service.save_example(normalized, letter)
                 count = len(self.classifier.labels)
                 self.training_status.setText(f"Ejemplos guardados: {count}")
 
@@ -211,19 +219,30 @@ class MainWindow(QMainWindow):
         letter = self.letter_input.toPlainText().strip().upper()
         if not letter:
             return
-        count = 0
+        
+        batch = []
+
         for _ in range(30):
             ret, frame = self.cap.read()
+
             if not ret:
                 continue
+
             _, landmarks = self.detector.detect(frame)
             if landmarks:
                 normalized = self.detector.normalize(landmarks)
                 if normalized:
-                    self.classifier.save_example(normalized, letter)
-                    count += 1
-        total = len(self.classifier.labels)
-        self.training_status.setText(f"Ejemplos guardados: {total} (+{count} de {letter})")
+                    batch.append({
+                        "letter": letter,
+                        "landmarks":normalized
+                    })
+        if batch:
+            self.dataset_service.save_batch(batch)
+
+            total = len(self.dataset_service.labels)
+            self.training_status.setText(
+                f"Ejemplos guardados: {total} (+{len(batch)} de {letter})"
+            )
 
     def closeEvent(self, event):
         self.stop_camera()
