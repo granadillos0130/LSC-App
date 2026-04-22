@@ -6,12 +6,15 @@ class DatasetService:
         self.load()
 
     def load(self):
-        data = self.repo.get_all()
+        try:
+            data = self.repo.get_all()
 
-        self.data = [item['landmarks'] for item in data]
-        self.letters = [item['letter'] for item in data]
+            self.data = [item['landmarks'] for item in data]
+            self.letters = [item['letter'] for item in data]
 
-        print(f"Data cargando: {len(self.letters)}")
+            print(f"Data cargando: {len(self.letters)}")
+        except Exception as e:
+            print(f"Error al cargar la información: {e}")
 
     def save_example(self, landmarks, letter):
         try:
