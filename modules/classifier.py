@@ -6,7 +6,7 @@ class SignClassifier:
         self.service = dataset_service
 
     def predict(self, landmarks, k=5):
-        dataset = self.service.dataset
+        dataset = self.service.data
         letters = self.service.letters
 
         if len(dataset) < k:

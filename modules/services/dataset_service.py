@@ -1,8 +1,9 @@
 class DatasetService:
-    def __eq__(self, repo):
-        self.repo = self.repo
+    def __init__(self, repo):
+        self.repo = repo
         self.data = []
         self.letters = []
+        self.load()
 
     def load(self):
         data = self.repo.get_all()
@@ -12,16 +13,19 @@ class DatasetService:
 
         print(f"Data cargando: {len(self.letters)}")
 
-    def save_example(self, landmarks, label):
-        example = {
-            "label": label,
-            "landmarks": landmarks
-        }
+    def save_example(self, landmarks, letter):
+        try:
+            example = {
+                "letter": letter,
+                "landmarks": landmarks
+            }
 
-        self.repo.insert_batch([example])
+            self.repo.insert_batch([example])
 
-        # cache
-        self.dataset.append(landmarks)
-        self.labels.append(label)
+            # cache
+            self.data.append(landmarks)
+            self.letters.append(letter)
 
-        print(f"Ejemplo guardado: {label}")
+            print(f"Ejemplo guardado: {letter}")
+        except Exception as e:
+            print(e)

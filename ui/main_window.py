@@ -212,7 +212,7 @@ class MainWindow(QMainWindow):
             normalized = self.detector.normalize(landmarks)
             if normalized:
                 self.dataset_service.save_example(normalized, letter)
-                count = len(self.classifier.labels)
+                count = len(self.classifier.service.letters)
                 self.training_status.setText(f"Ejemplos guardados: {count}")
 
     def capture_burst(self):
