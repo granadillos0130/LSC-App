@@ -12,10 +12,16 @@ class DatasetService:
 
         print(f"Data cargando: {len(self.letters)}")
 
-    def save_batch(self, examples):
-        self.repo.insert_batch(examples)
+    def save_example(self, landmarks, label):
+        example = {
+            "label": label,
+            "landmarks": landmarks
+        }
 
-        # actualizar cache en memoria
-        for ex in examples:
-            self.data.append(ex['landmarks'])
-            self.letters.append(ex['letter'])
+        self.repo.insert_batch([example])
+
+        # cache
+        self.dataset.append(landmarks)
+        self.labels.append(label)
+
+        print(f"Ejemplo guardado: {label}")
