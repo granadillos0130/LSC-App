@@ -41,6 +41,6 @@ class DatasetService:
                 self.dataset.append(ex["landmarks"])
                 self.labels.append(ex["letter"])
 
-            print(f"Lote guardado: {let(examples)} ejemplos")
+            print(f"Lote guardado: {len(examples)} ejemplos")
         except Exception as e:
             print(f"Error al gurdar: {e}")
