@@ -32,3 +32,15 @@ class DatasetService:
             print(f"Ejemplo guardado: {letter}")
         except Exception as e:
             print(e)
+
+    def save_batch(self, examples):
+        try:
+            self.repo.insert_batch(examples)
+
+            for ex in examples:
+                self.dataset.append(ex["landmarks"])
+                self.labels.append(ex["letter"])
+
+            print(f"Lote guardado: {let(examples)} ejemplos")
+        except Exception as e:
+            print(f"Error al gurdar: {e}")

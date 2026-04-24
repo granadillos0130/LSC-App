@@ -239,7 +239,7 @@ class MainWindow(QMainWindow):
         if batch:
             self.dataset_service.save_batch(batch)
 
-            total = len(self.dataset_service.labels)
+            total = len(self.dataset_service.letters)
             self.training_status.setText(
                 f"Ejemplos guardados: {total} (+{len(batch)} de {letter})"
             )
