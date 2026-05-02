@@ -1,6 +1,7 @@
 import os
 from PyQt5.QtGui import QPixmap
 from PyQt5.QtCore import Qt
+
 class SignDisplay:
     def __init__(self, signs_path='assets/signs'):
         self.signs_path = signs_path
