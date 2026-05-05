@@ -15,3 +15,12 @@ class SaveExampleRquest(BaseModel):
     letter: str
     landmrks: List[float] = Field(..., min_items=63, max_items=63)
 
+#batch(entrenamiento)
+
+class BatchItem(BaseModel):
+    letter: str
+    landmarks: List[float]
+
+class BatchResponse(BaseModel):
+    saved: int
+
