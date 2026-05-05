@@ -24,3 +24,7 @@ class BatchItem(BaseModel):
 class BatchResponse(BaseModel):
     saved: int
 
+#dataset info
+
+class DatasetInfoResponse(BaseModel):
+    samples: int
