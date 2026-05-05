@@ -12,12 +12,12 @@ from .schemas import (
 )
 
 #servicios
-from infrastructure.db import DatabaseRepository
+from infrastructure.db.dataset_repo import DatabaseRepository
 from application.services.dataset_service import DatasetService
 from application.services.training_service import TrainingService
 from domain.classifier import SignClassifier
 
-rotuer = APIRouter(prefix="/api")
+router = APIRouter(prefix="/api")
 
 #composición: composition root conecta los modulos de la app
 

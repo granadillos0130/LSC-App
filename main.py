@@ -1,13 +1,5 @@
-import sys
-from PyQt5.QtWidgets import QApplication
-from ui.main_window import MainWindow
+from fastapi import FastAPI
+from presentation.api.routes import router
 
-def main():
-    app = QApplication(sys.argv)
-    app.setStyle('Fusion')
-    window = MainWindow()
-    window.show()
-    sys.exit(app.exec())
-
-if __name__ == '__main__':
-    main()
+app = FastAPI(title="LSC API")
+app.include_router(router)
