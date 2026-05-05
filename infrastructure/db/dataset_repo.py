@@ -6,6 +6,8 @@ class DatabaseRepository:
         res = supabase.table("training_data").select(*).execute()
         return res.data
     
+    def save(self, item):
+        supabase.table("training_data").insert(item).execute()
 
     def insert_batch(self, examples, batch_size=500):
         try:
