@@ -38,8 +38,8 @@ class DatasetService:
             self.repo.insert_batch(examples)
 
             for ex in examples:
-                self.dataset.append(ex["landmarks"])
-                self.labels.append(ex["letter"])
+                self.data.append(ex["landmarks"])
+                self.letters.append(ex["letter"])
 
             print(f"Lote guardado: {len(examples)} ejemplos")
         except Exception as e:
