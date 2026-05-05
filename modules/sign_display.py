@@ -36,9 +36,19 @@ class SignDisplay:
         return pixmap
 
     def get_sentence_signs(self, sentence):
+<<<<<<< HEAD
         return [
             ('SPACE', None) if char == ' '
             else (char, self.get_sign_pixmap(char))
             for char in sentence.upper()
             if char == ' ' or char in self.signs
         ]
+=======
+        signs = []
+        for char in sentence.upper():
+            if char == ' ':
+                signs.append(('SPACE', None))
+            elif char in self.signs:
+                signs.append((char, self.get_sign_pixmap(char)))
+        return signs
+>>>>>>> julian
