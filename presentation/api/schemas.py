@@ -3,7 +3,7 @@ from pydantic import BaseModel, Field
 from typing import List, Optional
 
 #prediccion
-class PredictResquest(BaseModel):
+class PredictRequest(BaseModel):
     l: List[float] = Field(..., min_items=63, max_items=63)
 
 class PredictResponse(BaseModel):
@@ -11,7 +11,7 @@ class PredictResponse(BaseModel):
     c: float
 
 #guardar ejemplo
-class SaveExampleRquest(BaseModel):
+class SaveExampleRequest(BaseModel):
     letter: str
     landmrks: List[float] = Field(..., min_items=63, max_items=63)
 
