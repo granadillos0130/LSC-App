@@ -1,9 +1,9 @@
-from modules.db.db import supabase
+from .db import supabase
 
 class DatabaseRepository:
 
     def get_all(self):
-        res = supabase.table("training_data").select(*).execute()
+        res = supabase.table("training_data").select("*").execute()
         return res.data
     
     def save(self, item):
