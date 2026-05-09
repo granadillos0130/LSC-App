@@ -28,3 +28,14 @@ class BatchResponse(BaseModel):
 
 class DatasetInfoResponse(BaseModel):
     samples: int
+
+#landmarks promedio por letra
+
+class LandmarksResponse(BaseModel):
+    letter: str
+    landmarks: List[float]
+
+#transcripción de voz
+
+class STTResponse(BaseModel):
+    text: str
