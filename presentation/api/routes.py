@@ -71,7 +71,7 @@ def save_batch(data: List[BatchItem]):
         batch = [item.dict() for item in data]
         training_service.save_batch(batch)
         return {
-            "saved batch":len(batch)
+            "saved":len(batch)
         }
     except Exception as e:
         raise HTTPException(500, str(e))

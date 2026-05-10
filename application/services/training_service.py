@@ -9,7 +9,7 @@ class TrainingService:
             self.dataset_service.repo.save_batch(batch)
 
             for item in batch:
-                self.dataset_servie.data.append(item["landmarks"])
+                self.dataset_service.data.append(item["landmarks"])
                 self.dataset_service.letters.append(item["letter"])
         
         except Exception as e:
