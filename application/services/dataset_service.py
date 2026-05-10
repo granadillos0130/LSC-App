@@ -23,7 +23,7 @@ class DatasetService:
                 "landmarks": landmarks
             }
 
-            self.repo.insert_batch([example])
+            self.repo.save_batch([example])
 
             # cache
             self.data.append(landmarks)
@@ -35,7 +35,7 @@ class DatasetService:
 
     def save_batch(self, examples):
         try:
-            self.repo.insert_batch(examples)
+            self.repo.save_batch(examples)
 
             for ex in examples:
                 self.data.append(ex["landmarks"])
